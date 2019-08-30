@@ -26,7 +26,7 @@ class Counter extends Collector
     }
 
     /**
-     * @param int $count e.g. 2
+     * @param float $count  e.g. 3.14
      * @param array $labels e.g. ['status', 'opcode']
      */
     public function incBy($count, array $labels = array())
@@ -41,7 +41,7 @@ class Counter extends Collector
                 'labelNames' => $this->getLabelNames(),
                 'labelValues' => $labels,
                 'value' => $count,
-                'command' => Adapter::COMMAND_INCREMENT_INTEGER
+                'command' => Adapter::COMMAND_INCREMENT_FLOAT
             )
         );
     }
