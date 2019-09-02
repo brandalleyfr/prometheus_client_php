@@ -1,13 +1,10 @@
 {
-    "name": "jimdo/prometheus_client_php",
+    "name": "brandalleyfr/prometheus_client_php",
+    "description": "Fork of jimdo/prometheus_client_php",
     "authors": [
         {
-            "name": "Joscha",
-            "email": "joscha@schnipseljagd.org"
-        },
-        {
-            "name": "Jan Brauer",
-            "email": "jan.brauer@jimdo.com"
+            "name": "Brandalley",
+            "email": "cdp-it@brandalley.com"
         }
     ],
     "require": {
