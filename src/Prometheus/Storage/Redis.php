@@ -124,7 +124,7 @@ class Redis implements Adapter
         $this->redis->eval(<<<LUA
 local increment = redis.call('hIncrByFloat', KEYS[1], KEYS[2], ARGV[1])
 redis.call('hIncrBy', KEYS[1], KEYS[3], 1)
-if increment == ARGV[1] then
+if math.abs(increment - ARGV[1]) <= .00000000000000001 then
     redis.call('hSet', KEYS[1], '__meta', ARGV[2])
     redis.call('sAdd', KEYS[4], KEYS[1])
 end
@@ -158,7 +158,7 @@ if KEYS[2] == 'hSet' then
         redis.call('sAdd', KEYS[3], KEYS[1])
     end
 else
-    if result == ARGV[1] then
+    if math.abs(result - ARGV[1]) <= .00000000000000001 then
         redis.call('hSet', KEYS[1], '__meta', ARGV[2])
         redis.call('sAdd', KEYS[3], KEYS[1])
     end
@@ -186,7 +186,7 @@ LUA
         unset($metaData['command']);
         $result = $this->redis->eval(<<<LUA
 local result = redis.call(KEYS[2], KEYS[1], KEYS[4], ARGV[1])
-if result == tonumber(ARGV[1]) then
+if (result - tonumber(ARGV[1])) <= .00000000000000001 then
     redis.call('hMSet', KEYS[1], '__meta', ARGV[2])
     redis.call('sAdd', KEYS[3], KEYS[1])
 end
